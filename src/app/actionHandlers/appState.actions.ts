@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { VehicleType } from '../models/vehicleType';
 
 // ActionTypes
 import {
@@ -7,14 +8,22 @@ import {
     START_LOADER,
     STOP_LOADER,
 } from '../stores/appState.store';
+import {
+    UPDATE_VEHICLE_TYPES
+} from '../stores/vehicles.store';
 
 @Injectable()
 export class AppStateActions {
 
     constructor(
         private _store: Store<any>,
-        // private _quoteHelper: QuoteHelper
     ) { }
+
+    public initializeApp(): void {
+        // load vehicle types
+        const vehicleTypes = this.getVehicleTypesMock();
+        this._store.dispatch({ type: UPDATE_VEHICLE_TYPES, payload: vehicleTypes });
+    }
 
     public updateState(stateChanges): void {
         this._store.dispatch(
@@ -40,19 +49,33 @@ export class AppStateActions {
                 type: STOP_LOADER
             }
         );
-        this.updateFocus();
     }
 
-    private updateFocus() {
-        var self = this;
-        setTimeout(() => {
-            let appState: any;
-            self._store.select('appState').take(1).subscribe(state => appState = state);
-            let sourceId = appState['pns_currentFocusElement']
-            if (sourceId && document.getElementById(sourceId)) {
-                document.getElementById(sourceId).focus();
-            }
-        }, 100);
+    private getVehicleTypesMock(): Array<VehicleType> {
+        const vehicleTypes = [
+            {
+                id: "S",
+                name: "Model S",
+                description: "Luxury sedan with great performance",
+                imageUrl: 'http://insideevs.com/wp-content/uploads/2013/12/tesla-model-s-beach.jpg',
+                basePrice: 65000,
+            },
+            {
+                id: "3",
+                name: "Model 3",
+                description: "Compact sedan with giant iPad for a dashboard",
+                imageUrl: 'http://viteze.ro/wp-content/uploads/2016/04/tesla-model-3-2.jpg',
+                basePrice: 35000,
+            },
+            {
+                id: "X",
+                name: "Model X",
+                description: "Luxury SUV with great performance and cargo capacity",
+                imageUrl: 'https://cdn.arstechnica.net/wp-content/uploads/sites/3/2015/06/Tesla_Model_X_front_view_16042113157.jpg',
+                basePrice: 75000,
+            },
+        ];
+        return vehicleTypes;
     }
 
 }
