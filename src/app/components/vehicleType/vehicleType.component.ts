@@ -27,7 +27,9 @@ import { VehicleType } from '../../models/vehicleType';
       font-size: 5em;
     }
     .vehicleTypeImage {
-      height: 300px;
+      /* height: 300px; */
+      width: 40vw;
+      border-radius: 40px;
     }
     .description {
       font-size: xx-large;
