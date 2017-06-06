@@ -9,11 +9,11 @@ import { StoreModule } from "@ngrx/store";
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { AppComponent } from './components/app/app.component';
-import { APP_ACTION_HANDLERS } from './index';
-import { APP_COMPONENTS } from './index';
-import { APP_ROUTES } from './index';
-import { APP_SERVICES } from './index';
-import { APP_STORES } from './index';
+import { APP_ACTION_HANDLERS } from './app.actionHandlers';
+import { APP_COMPONENTS } from './app.components';
+import { APP_ROUTES } from './app.routes';
+import { APP_SERVICES } from './app.services';
+import { APP_STORES } from './app.stores';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { APP_STORES } from './index';
     HttpModule,
     MomentModule,
     RouterModule.forRoot(APP_ROUTES),
-    ...APP_STORES, // StoreModule.provideStore({ ...APP_STORES }),
+    StoreModule.provideStore(APP_STORES),
     ToasterModule,
   ],
   providers: [
