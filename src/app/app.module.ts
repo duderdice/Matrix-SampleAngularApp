@@ -1,10 +1,12 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from "@ngrx/store";
-import { ToasterModule } from 'angular2-toaster/angular2-toaster';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { AppComponent } from './components/app/app.component';
 import { APP_ACTION_HANDLERS } from './index';
@@ -18,7 +20,9 @@ import { APP_STORES } from './index';
     ...APP_COMPONENTS,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
     HttpModule,
     MomentModule,
     RouterModule.forRoot(APP_ROUTES),

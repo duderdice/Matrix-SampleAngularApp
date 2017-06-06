@@ -50,17 +50,17 @@ export class ApiService {
         });
 
         let response: Observable<Response>;
-        this._appStateActions.showLoaderGraphic(shouldBlock);
+        // this._appStateActions.showLoaderGraphic(shouldBlock);
         switch (requestType) {
 
             case REQUEST_TYPE_GET:
                 response = this._http.get(url, requestOptions)
                     .map(res => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -69,11 +69,11 @@ export class ApiService {
             case REQUEST_TYPE_POST:
                 response = this._http.post(url, body, requestOptions)
                     .map(res => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -82,11 +82,11 @@ export class ApiService {
             case REQUEST_TYPE_PUT:
                 response = this._http.put(url, body, requestOptions)
                     .map(res => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -95,11 +95,11 @@ export class ApiService {
             case REQUEST_TYPE_DELETE:
                 response = this._http.delete(url, requestOptions)
                     .map(res => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        this._appStateActions.hideLoaderGraphic();
+                        // this._appStateActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -112,7 +112,7 @@ export class ApiService {
     }
 
     public callApiServiceXhr({ requestType, url, headers, body, shouldBlock, responseType }: { requestType: string, url: string, headers?: Headers, body?: string, shouldBlock?: boolean, responseType?: ResponseContentType }): Observable<any> {
-        this._appStateActions.showLoaderGraphic(shouldBlock);
+        // this._appStateActions.showLoaderGraphic(shouldBlock);
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiServiceXhr(${requestType}, ${url}, ${headers}, ${body})`);
         return Observable.create((observer) => {
             let xhr = new XMLHttpRequest();
@@ -121,7 +121,7 @@ export class ApiService {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                    this._appStateActions.hideLoaderGraphic();
+                    // this._appStateActions.hideLoaderGraphic();
                     if (xhr.status === 200 || xhr.status === 201) {
                         // observer.next(JSON.stringify(xhr.response));
                         observer.next(JSON.parse(xhr.response));
