@@ -9,7 +9,6 @@ export const
 
 // declare all valid properties in initial state, as we validate when updating
 const initialAppState = {
-
     /* globals */
     'global.apiVersion': "",
     'global.isUserSessionActive': false,
@@ -20,28 +19,17 @@ const initialAppState = {
     'logging.logLevel': LogLevels.ERROR,
 
     /* Modals */
-    'quote.isNonERPCountryModalShown': false,
-    'quote.isOrderTypeModalShown': false,
-    'quote.isConfigurationSuggestionsModalShown': false,
+    'isPaymentTransactionModalShown': false,
 
     /* Main Menu */
     'menu.mainMenuCollapsed': true,
-    'menu.chatMenuCollapsed': true,
-    'menu.showCreateQuoteModal': false,
-    'menu.productMenuCollapsed': true,
-    'menu.quoteHeaderMenuCollapsed': true,
-    'menu.serviceMenuCollapsed': true,
-    'menu.freightMenuCollapsed': true,
-    'menu.optionsMenuCollapsed': true,
-    'menu.serviceOptionsMenuCollapsed': true,
-    'menu.showDeleteQuoteModal': false,
 
     /* search */
     'search.quoteSearchObject': null,
     'search.returnToQuoteSearchResults': false,
     'search.backToSearchResultsNeeded': false
-
 };
+
 export const appState = (state: any = initialAppState, action: Action) => {
     switch (action.type) {
         case UPDATE_APP_STATE:

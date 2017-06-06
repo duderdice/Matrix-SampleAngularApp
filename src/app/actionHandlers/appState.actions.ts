@@ -21,7 +21,7 @@ export class AppStateActions {
 
     public initializeApp(): void {
         // load vehicle types
-        const vehicleTypes = this.getVehicleTypesMock();
+        const vehicleTypes: Array<VehicleType> = this.getVehicleTypesMock();
         this._store.dispatch({ type: UPDATE_VEHICLE_TYPES, payload: vehicleTypes });
     }
 
@@ -34,22 +34,8 @@ export class AppStateActions {
         );
     }
 
-    public showLoaderGraphic(shouldBlock: boolean = false): void {
-        this._store.dispatch(
-            {
-                type: START_LOADER,
-                payload: { shouldBlock }
-            }
-        );
-    }
-
-    public hideLoaderGraphic(): void {
-        this._store.dispatch(
-            {
-                type: STOP_LOADER
-            }
-        );
-    }
+    //------------------------------------------------------------------------------------------------
+    // mock services
 
     private getVehicleTypesMock(): Array<VehicleType> {
         const vehicleTypes = [
@@ -63,9 +49,10 @@ export class AppStateActions {
             {
                 id: "3",
                 name: "Model 3",
-                description: "Compact sedan with giant iPad for a dashboard",
+                description: "An affordable compact car for the masses",
                 // imageUrl: 'http://viteze.ro/wp-content/uploads/2016/04/tesla-model-3-2.jpg',
-                imageUrl: 'http://insideevs.com/wp-content/uploads/2016/06/model-3.jpg',
+                // imageUrl: 'http://insideevs.com/wp-content/uploads/2016/06/model-3.jpg',
+                imageUrl: 'http://cdn.coresites.factorymedia.com/mpora_new/wp-content/uploads/2015/06/1966_vw_beetle_by_dangeruss-d5qbyyz.jpg',
                 basePrice: 35000,
             },
             {
@@ -75,7 +62,8 @@ export class AppStateActions {
                 // imageUrl: 'https://cdn.arstechnica.net/wp-content/uploads/sites/3/2015/06/Tesla_Model_X_front_view_16042113157.jpg',
                 // imageUrl: 'http://www.tflcar.com/wp-content/uploads/2014/06/Tesla-Model-X.jpg',
                 // imageUrl: 'https://wordlesstech.com/wp-content/uploads/2015/10/Tesla-Model-X-3.jpg',
-                imageUrl: 'http://st.motortrend.com/uploads/sites/5/2016/03/2016-Tesla-Model-X-P90D-side-profile.jpg',
+                // imageUrl: 'http://st.motortrend.com/uploads/sites/5/2016/03/2016-Tesla-Model-X-P90D-side-profile.jpg',
+                imageUrl: 'https://cdn.arstechnica.net/wp-content/uploads/2014/05/DSC_2096-980x651.jpg',
                 basePrice: 75000,
             },
         ];

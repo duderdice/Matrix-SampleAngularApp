@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponentComponent } from './dashboard-component.component';
+import { PaymentTrxModalComponent } from './payment-trx-modal.component';
 
-describe('DashboardComponentComponent', () => {
-  let component: DashboardComponentComponent;
-  let fixture: ComponentFixture<DashboardComponentComponent>;
+describe('PaymentTrxModalComponent', () => {
+  let component: PaymentTrxModalComponent;
+  let fixture: ComponentFixture<PaymentTrxModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponentComponent ]
+      declarations: [ PaymentTrxModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponentComponent);
+    fixture = TestBed.createComponent(PaymentTrxModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

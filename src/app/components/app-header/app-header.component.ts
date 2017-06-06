@@ -8,9 +8,8 @@ import { VehicleType } from '../../models/vehicleType';
   // templateUrl: './app-header.component.html',
   template: `
     <div class="headerPanel">
-      <div
-        *ngFor="let vehicleType of vehicleTypes"
-        class="model"
+      <div class="clickable homeIcon" (click)="home()"><i class="fa fa-home" aria-hidden="true"></i></div>
+      <div *ngFor="let vehicleType of vehicleTypes" class="clickable model"
         (click)="vehicleTypeSelected(vehicleType.id)">
         {{vehicleType.name}}
       <div>
@@ -28,6 +27,12 @@ import { VehicleType } from '../../models/vehicleType';
     .model {
       font-family: FANTASY;
       font-size: x-large;
+      flex: 2;
+    }
+    .homeIcon {
+      flex: 1;
+      font-size: 2em;
+      padding-left: 2em;
     }
   `],
 })
@@ -54,6 +59,10 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   public vehicleTypeSelected(id): void {
     console.log(`user clicked ${id}!`)
     this._router.navigate(['model', id]);
+  }
+
+  public home(): void {
+    this._router.navigate(['']);
   }
 
 }
