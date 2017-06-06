@@ -22,7 +22,7 @@ import { APP_STORES } from './index';
     HttpModule,
     MomentModule,
     RouterModule.forRoot(APP_ROUTES),
-    StoreModule.provideStore({ ...APP_STORES }),
+    ...APP_STORES, // StoreModule.provideStore({ ...APP_STORES }),
     ToasterModule,
   ],
   providers: [

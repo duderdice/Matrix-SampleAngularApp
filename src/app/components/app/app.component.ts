@@ -1,13 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToasterConfig } from 'angular2-toaster/angular2-toaster';
 
+import { AppStateActions } from '../../actionHandlers/appState.actions';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    //   templateUrl: './app.component.html',
+    template: `
+        <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+        <div class="mainBodyLayout">
+            <app-header></app-header>
+            <div class="mainBody">
+                <router-outlet></router-outlet>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    `,
+    // styleUrls: ['./app.component.css']
+    styles: [`
+        .mainBodyLayout {
+            display: flex;
+            flex-flow: column nowrap;
+            height: 100vh;
+        }
+        .mainBody {
+            flex: 1 0;
+        }
+    `],
 })
-export class AppComponent {
-  private title: string = 'app';
-  private toasterconfig: ToasterConfig = new ToasterConfig({ showCloseButton: true });
+export class AppComponent implements OnInit {
+    private toasterconfig: ToasterConfig = new ToasterConfig({ showCloseButton: true });
+
+    constructor(
+        private _appStateActions: AppStateActions
+    ) { }
+
+    ngOnInit() {
+        this._appStateActions.initializeApp();
+    }
 
 }
