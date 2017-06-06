@@ -5,6 +5,7 @@ import { Store, StoreModule } from "@ngrx/store";
 import { appState, loaderState } from './stores/appState.store';
 import { user, userRoleMask } from './stores/user.store';
 import { vehicleTypes } from './stores/vehicles.store';
+import { payment } from './stores/payment.store';
 
 export const APP_STORES = [
     StoreModule.provideStore({
@@ -20,5 +21,7 @@ export const APP_STORES = [
         // Vehicles
         vehicleTypes,
 
+        // Payment
+        payment,
     }),
 ];

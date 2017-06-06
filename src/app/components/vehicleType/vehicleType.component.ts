@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-
 import { AppStateActions } from '../../actionHandlers/appState.actions';
 import { VehicleType } from '../../models/vehicleType';
 
@@ -13,10 +12,14 @@ import { VehicleType } from '../../models/vehicleType';
       <h1 class="name">{{selectedVehicleType.name}}</h1>
       <div><img class="vehicleTypeImage" src="{{selectedVehicleType?.imageUrl}}" /></div>
       <div class="description">{{selectedVehicleType?.description}}</div>
-      <div class="basePrice">{{selectedVehicleType?.basePrice}}</div>
+      <div class="basePrice">{{selectedVehicleType?.basePrice | currency: 'USD' : true }}</div>
       <div (click)="buyNow()"><img src="http://marketingland.com/wp-content/ml-loads/2015/08/image13.png"/></div>
     </div>
-    <app-payment-trx-modal *ngIf="isPaymentTransactionModalShown"></app-payment-trx-modal>
+
+    <app-payment-trx-modal *ngIf="isPaymentTransactionModalShown"
+      [paymentAmount]="selectedVehicleType?.basePrice"
+      (paymentTrxModalClosed)="paymentTrxModalClosed()"
+      ></app-payment-trx-modal>
   `,
   // styleUrls: ['./vehicleType.component.css']
   styles: [`
@@ -30,14 +33,13 @@ import { VehicleType } from '../../models/vehicleType';
     }
     .vehicleTypeImage {
       height: 40vh;
-      /* width: 40vw; */
       border-radius: 40px;
     }
     .description {
       font-size: xx-large;
     }
     .basePrice {
-      font-size: x-small;
+      font-size: small;
     }
   `],
 })
@@ -73,7 +75,6 @@ export class VehicleTypeComponent implements OnInit, OnDestroy {
       this.selectedVehicleType = this.vehicleTypes.find(vt => vt.id === this.selectedVehicleTypeId);
       console.log(`switched to ${JSON.stringify(this.selectedVehicleType)}`);
     });
-
   }
 
   public ngOnDestroy() {
@@ -84,4 +85,9 @@ export class VehicleTypeComponent implements OnInit, OnDestroy {
   private buyNow() {
     this._appStateActions.updateState({ 'isPaymentTransactionModalShown': true });
   }
+
+  private paymentTrxModalClosed() {
+    this._appStateActions.updateState({ 'isPaymentTransactionModalShown': false });
+  }
+
 }
