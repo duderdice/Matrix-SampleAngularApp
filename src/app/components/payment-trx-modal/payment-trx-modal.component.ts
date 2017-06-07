@@ -40,7 +40,7 @@ import { PaymentTrxResponse } from '../../models/paymentTrxResponse';
             <span class="spacer">&nbsp;</span>
             <span class="paymentTrxInputLabel">{{ paymentAmount | currency : 'USD' : true }}</span>
           </div>
-          <div *ngIf="!paymentTrxResponse || !paymentTrxResponse?.isSuccessful" class="paymentTrxInputGroup">
+          <div *ngIf="!paymentTrxResponse || !paymentTrxResponse?.isSuccessful" class="paymentTrxInputGroup center">
             <button type="button" (click)="placeOrder()">Place Order</button>
           </div>
           <div *ngIf="paymentTrxResponse && paymentTrxResponse.isSuccessful" class="paymentTrxInputGroup">
@@ -99,6 +99,9 @@ import { PaymentTrxResponse } from '../../models/paymentTrxResponse';
       vertical-align: middle;
       font-family: monospace;
       font-size: 2em;
+    }
+    .center {
+      justify-content: center;
     }
     .spacer {
       flex: 2;
