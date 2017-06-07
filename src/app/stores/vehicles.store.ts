@@ -4,7 +4,8 @@ import { VehicleType } from '../models/vehicleType';
 
 // ActionTypes
 export const
-    UPDATE_VEHICLE_TYPES = 'UPDATE_VEHICLE_TYPES';
+    UPDATE_VEHICLE_TYPES = 'UPDATE_VEHICLE_TYPES',
+    CLEAR_VEHICLE_TYPES = 'CLEAR_VEHICLE_TYPES';
 
 // Stores
 export const vehicleTypes = (state: Array<VehicleType> = [], action: Action) => {
@@ -12,6 +13,9 @@ export const vehicleTypes = (state: Array<VehicleType> = [], action: Action) => 
 
         case UPDATE_VEHICLE_TYPES:
             return action.payload;
+
+        case CLEAR_VEHICLE_TYPES:
+            return [];
 
         default:
             return state;

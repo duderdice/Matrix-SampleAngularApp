@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
         private _appStateActions: AppStateActions
     ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
         this._appStateActions.initializeApp();
     }
 
