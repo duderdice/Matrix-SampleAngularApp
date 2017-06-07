@@ -37,7 +37,6 @@ export class AppFooterComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-
   }
 
 }

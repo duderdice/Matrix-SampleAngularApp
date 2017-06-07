@@ -145,7 +145,7 @@ export class PaymentTrxModalComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    //
+    this.paymentTrxResponseSubscription.unsubscribe();
   }
 
   private placeOrder() {

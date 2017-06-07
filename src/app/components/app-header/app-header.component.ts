@@ -15,7 +15,7 @@ import { VehicleType } from '../../models/vehicleType';
         (click)="vehicleTypeSelected(vehicleType.id)">
         {{vehicleType.name}}
       </div>
-      <div *ngIf="paymentTrxResponse" class="clickable homeIcon" (click)="showPaymentTrx()">
+      <div *ngIf="paymentTrxResponse && paymentTrxResponse?.isSuccessful" class="clickable paymentTrxIcon" (click)="showPaymentTrx()">
         <i class="fa fa-money" aria-hidden="true"></i>
       </div>
     </div>
@@ -38,6 +38,12 @@ import { VehicleType } from '../../models/vehicleType';
       flex: 1;
       font-size: 2em;
       padding-left: 2em;
+    }
+    .paymentTrxIcon {
+      /* flex: 1; */
+      text-align: right;
+      font-size: 2em;
+      padding-right: 2em;
     }
   `],
 })
@@ -67,10 +73,10 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     this.vehicleTypesSubscription.unsubscribe();
+    this.paymentTrxResponseSubscription.unsubscribe();
   }
 
   private vehicleTypeSelected(id): void {
-    console.log(`user clicked ${id}!`)
     this._router.navigate(['model', id]);
   }
 

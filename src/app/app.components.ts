@@ -4,7 +4,6 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
 import { HomeComponent } from './components/home/home.component';
 import { PaymentTrxModalComponent } from './components/payment-trx-modal/payment-trx-modal.component';
 import { VehicleTypeComponent } from './components/vehicleType/vehicleType.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 export const APP_COMPONENTS = [
     AppComponent,
@@ -13,5 +12,4 @@ export const APP_COMPONENTS = [
     HomeComponent,
     PaymentTrxModalComponent,
     VehicleTypeComponent,
-    ToolbarComponent,
 ];
