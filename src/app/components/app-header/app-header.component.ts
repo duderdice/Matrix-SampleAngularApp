@@ -52,7 +52,7 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   private vehicleTypes: Array<VehicleType>;
   private vehicleTypesSubscription;
 
-  private paymentTrxResponse: PaymentTrxResponse;
+  public paymentTrxResponse: PaymentTrxResponse;
   private paymentTrxResponseSubscription;
 
   constructor(
@@ -76,15 +76,15 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
     this.paymentTrxResponseSubscription.unsubscribe();
   }
 
-  private vehicleTypeSelected(id): void {
+  public vehicleTypeSelected(id): void {
     this._router.navigate(['model', id]);
   }
 
-  private home(): void {
+  public home(): void {
     this._router.navigate(['']);
   }
 
-  private showPaymentTrx() {
+  public showPaymentTrx() {
     this._appStateActions.updateState({ 'isPaymentTransactionModalShown': true });
   }
 

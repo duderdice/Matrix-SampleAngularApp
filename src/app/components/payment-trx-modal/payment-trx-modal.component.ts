@@ -118,13 +118,13 @@ export class PaymentTrxModalComponent implements OnInit, OnDestroy {
   @Input() public paymentAmount: number;
   @Output() public paymentTrxModalClosed = new EventEmitter();
 
-  private name: string;
-  private cardNumber: string;
-  private expMonth: string;
-  private expYear: string;
-  private securityCode: string;
+  public name: string;
+  public cardNumber: string;
+  public expMonth: string;
+  public expYear: string;
+  public securityCode: string;
 
-  private paymentTrxResponse: PaymentTrxResponse;
+  public paymentTrxResponse: PaymentTrxResponse;
   private paymentTrxResponseSubscription;
 
   constructor(
@@ -151,8 +151,8 @@ export class PaymentTrxModalComponent implements OnInit, OnDestroy {
     this.paymentTrxResponseSubscription.unsubscribe();
   }
 
-  private placeOrder() {
-    //validate fields
+  public placeOrder() {
+    // validate fields
     if (!this.name) {
       this._notificationActions.notifyError({ title: 'Payment-Trx', message: `Please provide a credit card NAME for this payment transaction.` });
       return;
@@ -174,7 +174,7 @@ export class PaymentTrxModalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let paymentTrxRequest: PaymentTrxRequest = {
+    const paymentTrxRequest: PaymentTrxRequest = {
       name: this.name,
       cardNumber: this.cardNumber,
       expMonth: this.expMonth,
@@ -185,7 +185,7 @@ export class PaymentTrxModalComponent implements OnInit, OnDestroy {
     this._userActions.processPaymentTrx(paymentTrxRequest);
   }
 
-  private closeModal() {
+  public closeModal() {
     // this._appStateActions.updateState({ 'isPaymentTransactionModalShown': false });
     this.paymentTrxModalClosed.emit();
   }

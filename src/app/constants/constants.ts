@@ -7,7 +7,7 @@
 export const
     AppName = 'SampleAngularApp',
     AppVersion = 'v0.0.0',
-    BuildType: string = 'noBuildType',
+    BuildType = 'noBuildType',
     DATE_FORMAT_ddmmyyyy = 'dd-mmm-yyyy',
     DATE_FORMAT_dMMMy = 'dd-MMM-y',
     DATE_TIME_FORMAT = 'dd-MMM-y HH:mm Z',

@@ -1,5 +1,5 @@
 // Store framework functions
-import { Store, StoreModule } from "@ngrx/store";
+import { Store, StoreModule } from '@ngrx/store';
 
 // Stores/Reducers
 import { appState, loaderState } from './stores/appState.store';

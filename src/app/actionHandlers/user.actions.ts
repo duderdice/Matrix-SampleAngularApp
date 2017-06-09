@@ -32,7 +32,7 @@ export class UserActions {
         this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: paymentTrxResponse });
     }
 
-    //------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------
     // mock services
 
     private submitPaymentTrxMock(paymentTrxRequest: PaymentTrxRequest): PaymentTrxResponse {
@@ -56,7 +56,7 @@ export class UserActions {
             errorMessage: 'Insufficient Funds',
             paymentTrxRequest,
         };
-        let random = Math.random();
+        const random = Math.random();
         return (random > 0.5) ? goodPaymentTrxResponse : badPaymentTrxResponse;
     }
 }

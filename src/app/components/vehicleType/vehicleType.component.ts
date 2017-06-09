@@ -5,7 +5,7 @@ import { AppStateActions } from '../../actionHandlers/appState.actions';
 import { VehicleType } from '../../models/vehicleType';
 
 @Component({
-  selector: 'app-vehicleType',
+  selector: 'app-vehicle-type',
   // templateUrl: './vehicleType.component.html',
   template: `
     <div class="mainContainer">
@@ -49,9 +49,9 @@ export class VehicleTypeComponent implements OnInit, OnDestroy {
   private vehicleTypesSubscription;
 
   private selectedVehicleTypeId: string;
-  private selectedVehicleType: VehicleType;
+  public selectedVehicleType: VehicleType;
 
-  private isPaymentTransactionModalShown: boolean;
+  public isPaymentTransactionModalShown: boolean;
   private isPaymentTransactionModalShownSubscription;
 
   constructor(
@@ -82,11 +82,11 @@ export class VehicleTypeComponent implements OnInit, OnDestroy {
     this.isPaymentTransactionModalShownSubscription.unsubscribe();
   }
 
-  private buyNow() {
+  public buyNow() {
     this._appStateActions.updateState({ 'isPaymentTransactionModalShown': true });
   }
 
-  private paymentTrxModalClosed() {
+  public paymentTrxModalClosed() {
     this._appStateActions.updateState({ 'isPaymentTransactionModalShown': false });
   }
 

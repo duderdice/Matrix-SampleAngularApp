@@ -20,7 +20,7 @@ export const LogLevels = {
 
 @Injectable()
 export class LoggingService implements OnInit, OnDestroy {
-    private _sessionId: number = 0;
+    private _sessionId = 0;
     private user: User;
     private userSubscription: any;
     private appState: any;
@@ -103,17 +103,18 @@ export class LoggingService implements OnInit, OnDestroy {
     }
 
     private shouldLog(payload): boolean {
-        if (payload.level >= this.appState['logging.logLevel'])
+        if (payload.level >= this.appState['logging.logLevel']) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     private sendLogDataToApi({ payload }): void {
         try {
-            let headers = new Headers();
+            const headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            let result = this._http.post(`${Constants.ApiBaseUrl}/log`, payload, { headers, 'withCredentials': true })
+            const result = this._http.post(`${Constants.ApiBaseUrl}/log`, payload, { headers, 'withCredentials': true })
                 .map(res => {
                     return res.json() || {};
                 })
@@ -121,8 +122,7 @@ export class LoggingService implements OnInit, OnDestroy {
                     console.log(`Error occurred in LoggingService.sendLogDataToApi(${payload}) => ${err}`);
                     return Observable.throw(err);
                 });
-        }
-        catch (err) {
+        } catch (err) {
             console.log(`Error occurred in LoggingService.sendLogDataToApi(${payload}) => ${err}`);
         }
     }
