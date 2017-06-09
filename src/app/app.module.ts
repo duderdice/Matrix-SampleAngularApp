@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from "@ngrx/store";
+import { StoreModule } from '@ngrx/store';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { AppComponent } from './components/app/app.component';

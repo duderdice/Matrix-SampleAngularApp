@@ -42,7 +42,7 @@ export class ApiService {
         }
 
         // use request options to always set {'withCredentials':true} as well as passing a body on DELETE requests
-        let requestOptions = new RequestOptions({
+        const requestOptions = new RequestOptions({
             body,
             headers,
             responseType,
@@ -115,7 +115,7 @@ export class ApiService {
         // this._appStateActions.showLoaderGraphic(shouldBlock);
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiServiceXhr(${requestType}, ${url}, ${headers}, ${body})`);
         return Observable.create((observer) => {
-            let xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             xhr.open(requestType, url, true);
             xhr.withCredentials = true;
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -137,25 +137,25 @@ export class ApiService {
 
     private getResponseContent(url: string, res: Response) {
         try {
-            let contentType = res.headers.get("content-type");
-            if (contentType && contentType.indexOf(";") !== -1) {
+            let contentType = res.headers.get('content-type');
+            if (contentType && contentType.indexOf(';') !== -1) {
                 // strip the charset declaration to simplify the comparison
-                contentType = contentType.substring(0, contentType.indexOf(";"));
+                contentType = contentType.substring(0, contentType.indexOf(';'));
             }
             // console.log(`contentType => [${contentType}]`);
             switch (contentType) {
 
-                case "application/x-file-download":
+                case 'application/x-file-download':
                     return res;
 
-                case "application/json":
+                case 'application/json':
                     return res.json();
 
-                case "text/plain":
-                case "text/html":
+                case 'text/plain':
+                case 'text/html':
                     return res.text();
 
-                case "application/vnd.ms-excel":
+                case 'application/vnd.ms-excel':
                     return res.blob();
 
                 case null:
@@ -165,13 +165,11 @@ export class ApiService {
                     this._loggingService.sendLogMessage(LogLevels.INFO, `Unhandled Content-Type [${contentType}] in ApiService response from [${url}]; using default logic to provide response.`);
                     return res.text() ? res.json() : {};
             }
-        }
-        catch (e) {
-            let resContent = JSON.stringify(res).substr(0, 512);
+        } catch (e) {
+            const resContent = JSON.stringify(res).substr(0, 512);
             this._loggingService.sendLogMessage(LogLevels.ERROR, `ERROR while processing response content [${e.name} => ${e.message}]\n\turl => ${url}\n\tresponse => ${resContent}`);
             throw (e);
-        }
-        finally {
+        } finally {
             //
         }
     }

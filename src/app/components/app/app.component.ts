@@ -29,7 +29,7 @@ import { AppStateActions } from '../../actionHandlers/appState.actions';
     `],
 })
 export class AppComponent implements OnInit {
-    private toasterconfig: ToasterConfig = new ToasterConfig({ showCloseButton: true });
+    public toasterconfig: ToasterConfig = new ToasterConfig({ showCloseButton: true });
 
     constructor(
         private _appStateActions: AppStateActions

@@ -10,7 +10,7 @@ export const
 // declare all valid properties in initial state, as we validate when updating
 const initialAppState = {
     /* globals */
-    'global.apiVersion': "",
+    'global.apiVersion': '',
     'global.isUserSessionActive': false,
 
     /* logging service */
@@ -33,11 +33,11 @@ const initialAppState = {
 export const appState = (state: any = initialAppState, action: Action) => {
     switch (action.type) {
         case UPDATE_APP_STATE:
-            var newState = makeClone(state);
+            const newState = makeClone(state);
             Object.keys(action.payload).map((prop) => {
                 // only update known properties, to catch errors
                 if (prop in state) {
-                    let newValue = action.payload[prop];
+                    const newValue = action.payload[prop];
                     newState[prop] = newValue;
                 } else {
                     // console.log(`invalid property [${prop}] passed into UiState-reducer`);
@@ -71,24 +71,24 @@ export const loaderState = (state: any = loaderInitialState, action: Action) => 
     switch (action.type) {
 
         case START_LOADER:
-            var newState = makeClone(state);
-            newState.isLoaderVisible = true;
-            ++newState.refCount;
+            const newState1 = makeClone(state);
+            newState1.isLoaderVisible = true;
+            ++newState1.refCount;
             if (action.payload.shouldBlock) {
-                newState.isBlockerVisible = true;
+                newState1.isBlockerVisible = true;
             }
             // console.log(`START_LOADER => ${JSON.stringify(newState)}`);
-            return newState;
+            return newState1;
 
         case STOP_LOADER:
-            var newState = makeClone(state);
-            --newState.refCount;
-            newState.isLoaderVisible = (newState.refCount > 0);
-            if (newState.isBlockerVisible && newState.refCount === 0) {
-                newState.isBlockerVisible = false; // Blocker was on but is no longer needed
+            const newState2 = makeClone(state);
+            --newState2.refCount;
+            newState2.isLoaderVisible = (newState2.refCount > 0);
+            if (newState2.isBlockerVisible && newState2.refCount === 0) {
+                newState2.isBlockerVisible = false; // Blocker was on but is no longer needed
             }
             // console.log(`STOP_LOADER => ${JSON.stringify(newState)}`);
-            return newState;
+            return newState2;
 
         default:
             return state;
