@@ -1,6 +1,5 @@
 import { Reducer, Action } from '@ngrx/store';
 import { LogLevels } from '../services/logging.service';
-import { makeClone } from '../helpers/utilities';
 import * as Constants from '../constants/constants';
 
 // ActionTypes
@@ -33,7 +32,7 @@ const initialAppState = {
 export const appState = (state: any = initialAppState, action: Action) => {
     switch (action.type) {
         case UPDATE_APP_STATE:
-            const newState = makeClone(state);
+            const newState = Object.assign({}, state);
             Object.keys(action.payload).map((prop) => {
                 // only update known properties, to catch errors
                 if (prop in state) {
@@ -71,24 +70,26 @@ export const loaderState = (state: any = loaderInitialState, action: Action) => 
     switch (action.type) {
 
         case START_LOADER:
-            const newState1 = makeClone(state);
-            newState1.isLoaderVisible = true;
-            ++newState1.refCount;
-            if (action.payload.shouldBlock) {
-                newState1.isBlockerVisible = true;
-            }
-            // console.log(`START_LOADER => ${JSON.stringify(newState)}`);
-            return newState1;
+            return Object.assign(
+                {},
+                state,
+                {
+                    isBlockerVisible: action.payload.shouldBlock ? true : state.isBlockerVisible,
+                    isLoaderVisible: true,
+                    refCount: state.refCount + 1,
+                }
+            );
 
         case STOP_LOADER:
-            const newState2 = makeClone(state);
-            --newState2.refCount;
-            newState2.isLoaderVisible = (newState2.refCount > 0);
-            if (newState2.isBlockerVisible && newState2.refCount === 0) {
-                newState2.isBlockerVisible = false; // Blocker was on but is no longer needed
-            }
-            // console.log(`STOP_LOADER => ${JSON.stringify(newState)}`);
-            return newState2;
+            return Object.assign(
+                {},
+                state,
+                {
+                    isBlockerVisible: (state.isBlockerVisible && (state.refCount - 1) === 0) ? false : state.isBlockerVisible,
+                    isLoaderVisible: ((state.refCount - 1) > 0),
+                    refCount: state.refCount - 1,
+                }
+            );
 
         default:
             return state;
