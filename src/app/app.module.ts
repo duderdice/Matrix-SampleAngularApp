@@ -6,6 +6,7 @@ import { MomentModule } from 'angular2-moment';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 import { AppComponent } from './components/app/app.component';
@@ -27,6 +28,7 @@ import { APP_STORES } from './app.stores';
     MomentModule,
     RouterModule.forRoot(APP_ROUTES),
     StoreModule.provideStore(APP_STORES),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({ maxAge: 5 }),
     ToasterModule,
   ],
   providers: [

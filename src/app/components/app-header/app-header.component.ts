@@ -49,7 +49,7 @@ import { VehicleType } from '../../models/vehicleType';
 })
 export class AppHeaderComponent implements OnInit, OnDestroy {
 
-  private vehicleTypes: Array<VehicleType>;
+  public vehicleTypes: Array<VehicleType>;
   private vehicleTypesSubscription;
 
   public paymentTrxResponse: PaymentTrxResponse;
