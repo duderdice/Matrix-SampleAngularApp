@@ -26,3 +26,4 @@ Before running the tests make sure you are serving the app via `ng serve`.
 * [Publish HTML website in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-html)
 * [Automating deployments on Azure](https://blogs.msdn.microsoft.com/mvpawardprogram/2015/11/24/automating-deployment-on-azure-web-apps/)
 * [Kudu deployment scripts](https://github.com/projectkudu/kudu/wiki/Custom-Deployment-Script)
+* [Get Started with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli)
