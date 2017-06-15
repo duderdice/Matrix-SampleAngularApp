@@ -1,5 +1,4 @@
 import { Reducer, Action } from '@ngrx/store';
-import { makeClone } from '../helpers/utilities';
 import { PaymentTrxResponse } from '../models/paymentTrxResponse';
 
 // ActionTypes
@@ -8,7 +7,7 @@ export const
     CLEAR_PAYMENT_TRX = 'UPDATE_PAYMENT_TRX';
 
 // Stores
-export const payment = (state: PaymentTrxResponse = null, action: Action) => {
+export function payment(state: PaymentTrxResponse = null, action: Action) {
     switch (action.type) {
 
         case UPDATE_PAYMENT_TRX:
