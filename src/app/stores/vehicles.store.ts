@@ -1,5 +1,4 @@
 import { Reducer, Action } from '@ngrx/store';
-import { makeClone } from '../helpers/utilities';
 import { VehicleType } from '../models/vehicleType';
 
 // ActionTypes
@@ -8,7 +7,7 @@ export const
     CLEAR_VEHICLE_TYPES = 'CLEAR_VEHICLE_TYPES';
 
 // Stores
-export const vehicleTypes = (state: Array<VehicleType> = [], action: Action) => {
+export function vehicleTypes(state: Array<VehicleType> = [], action: Action) {
     switch (action.type) {
 
         case UPDATE_VEHICLE_TYPES:

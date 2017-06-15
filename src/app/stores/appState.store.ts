@@ -29,7 +29,7 @@ const initialAppState = {
     'search.backToSearchResultsNeeded': false
 };
 
-export const appState = (state: any = initialAppState, action: Action) => {
+export function appState(state: object = initialAppState, action: Action) {
     switch (action.type) {
         case UPDATE_APP_STATE:
             const newState = Object.assign({}, state);
@@ -66,7 +66,7 @@ const loaderInitialState = {
     refCount: 0,
 }
 
-export const loaderState = (state: any = loaderInitialState, action: Action) => {
+export function loaderState(state: any = loaderInitialState, action: Action) {
     switch (action.type) {
 
         case START_LOADER:
