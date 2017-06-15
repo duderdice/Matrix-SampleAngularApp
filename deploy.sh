@@ -133,7 +133,7 @@ echo
 # 4. Deploy static files via KuduSync
 echo =======  [4] Deploying files: Starting at `date` =======
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE/dist/*" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" \
+  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE/dist/" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" \
     -i "e2e;node_modules;src;.angular-cli.json;.deployment;.editorconfig;.gitattributes;.gitignore;az.ps1;deploy.sh;karma.conf.js;package.json;protractor.conf.js;README.md;tsconfig.json;tslint.json;yarn.lock"
   exitWithMessageOnError "Kudu Sync failed"
   cd - > /dev/null
