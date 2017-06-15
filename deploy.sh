@@ -109,24 +109,23 @@ selectNodeVersion
 
 
 # 2. Install npm packages
-echo =======  @2 Executing npm install: Starting at `date` =======
+echo =======  [2] Executing npm install: Starting at `date` =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   cd "$DEPLOYMENT_SOURCE"
   eval $NPM_CMD install
-  #eval $NPM_CMD build
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
-echo =======  @2 Executing npm install: Finished at `date` =======
-
+echo =======  [2] Executing npm install: Finished at `date` =======
+echo
 
 # 3. Build ng app
-echo =======  (3) Executing npm build: Starting at $TIME =======
+echo =======  [3] Executing npm build: Starting at $TIME =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   #pushd "$DEPLOYMENT_SOURCE"
   cd "$DEPLOYMENT_SOURCE"
-  #eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build
-  eval $NPM_CMD run build
+  eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build
+  #eval $NPM_CMD run build
   #:: the next line is optional to fix 404 error see section #8
   #call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
   #IF !ERRORLEVEL! NEQ 0 goto error
@@ -134,17 +133,18 @@ if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   exitWithMessageOnError "ng build failed"
   cd - > /dev/null
 fi
-echo =======  (3) Executing npm build: Finished at $TIME =======
-
+echo =======  [3] Executing npm build: Finished at $TIME =======
+echo
 
 # 4. Deploy static files via KuduSync
-echo =======  (4) Deploying files: Starting at $TIME =======
+echo =======  [4] Deploying files: Starting at $TIME =======
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE/dist" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i "e2e;node_modules;src;.angular-cli.json;.deployment;.editorconfig;.gitattributes;.gitignore;az.ps1;deploy.sh;karma.conf.js;package.json;protractor.conf.js;README.md;tsconfig.json;tslint.json;yarn.lock"
   exitWithMessageOnError "Kudu Sync failed"
   cd - > /dev/null
 fi
-echo =======  (4) Deploying files: Finished at $TIME =======
+echo =======  [4] Deploying files: Finished at $TIME =======
+echo
 
 ##################################################################################################################################
 echo "Finished successfully."
