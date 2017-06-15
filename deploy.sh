@@ -122,14 +122,8 @@ echo
 # 3. Build ng app
 echo =======  [3] Executing npm build: Starting at `date` =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
-  #pushd "$DEPLOYMENT_SOURCE"
   cd "$DEPLOYMENT_SOURCE"
-  eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build
-  #eval $NPM_CMD run build
-  #:: the next line is optional to fix 404 error see section #8
-  #call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
-  #IF !ERRORLEVEL! NEQ 0 goto error
-  #popd
+  eval ./node_modules/@angular/cli/bin/ng build
   exitWithMessageOnError "ng build failed"
   cd - > /dev/null
 fi
