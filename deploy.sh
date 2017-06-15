@@ -32,7 +32,7 @@ ARTIFACTS=$SCRIPT_DIR/../artifacts
 KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
 
 # DGA - declare deployment source as /dist/
-DEPLOYMENT_SOURCE="${SCRIPT_DIR}/dist"
+#DEPLOYMENT_SOURCE="${SCRIPT_DIR}/dist"
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -101,35 +101,50 @@ selectNodeVersion () {
 # Deployment
 # ----------
 
-echo Handling node.js deployment.
+echo ******* Executing node.js deployment. *******
 
-# 1. KuduSync
-if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
-  exitWithMessageOnError "Kudu Sync failed"
-fi
 
-# 2. Select node version
+# 1. Select node version
 selectNodeVersion
 
-# 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
+
+# 2. Install npm packages
+echo =======  (2) Executing npm install: Starting at $TIME =======
+if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
+  cd "$DEPLOYMENT_SOURCE"
   eval $NPM_CMD install
-  eval $NPM_CMD build
+  #eval $NPM_CMD build
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
+echo =======  (2) Executing npm install: Finished at $TIME =======
 
-# 4. Build ng app
- IF EXIST "$DEPLOYMENT_TARGET/package.json" (
-      pushd "DEPLOYMENT_TARGET"
-      eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build --prod --env=prod --aot
-      #:: the next line is optional to fix 404 error see section #8
-      #call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
-      #IF !ERRORLEVEL! NEQ 0 goto error
-      #popd
-      exitWithMessageOnError "ng build failed"
-    )
+
+# 3. Build ng app
+echo =======  (3) Executing npm build: Starting at $TIME =======
+if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
+  #pushd "$DEPLOYMENT_SOURCE"
+  cd "$DEPLOYMENT_SOURCE"
+  #eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build
+  eval $NPM_CMD run build
+  #:: the next line is optional to fix 404 error see section #8
+  #call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
+  #IF !ERRORLEVEL! NEQ 0 goto error
+  #popd
+  exitWithMessageOnError "ng build failed"
+  cd - > /dev/null
+fi
+echo =======  (3) Executing npm build: Finished at $TIME =======
+
+
+# 4. Deploy static files via KuduSync
+echo =======  (4) Deploying files: Starting at $TIME =======
+if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
+  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE/dist" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i "e2e;node_modules;src;.angular-cli.json;.deployment;.editorconfig;.gitattributes;.gitignore;az.ps1;deploy.sh;karma.conf.js;package.json;protractor.conf.js;README.md;tsconfig.json;tslint.json;yarn.lock"
+  exitWithMessageOnError "Kudu Sync failed"
+  cd - > /dev/null
+fi
+echo =======  (4) Deploying files: Finished at $TIME =======
+
 ##################################################################################################################################
 echo "Finished successfully."
