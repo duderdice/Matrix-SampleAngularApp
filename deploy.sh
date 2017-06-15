@@ -109,7 +109,7 @@ selectNodeVersion
 
 
 # 2. Install npm packages
-echo =======  (2) Executing npm install: Starting at $TIME =======
+echo =======  @2 Executing npm install: Starting at `date` =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   cd "$DEPLOYMENT_SOURCE"
   eval $NPM_CMD install
@@ -117,7 +117,7 @@ if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
-echo =======  (2) Executing npm install: Finished at $TIME =======
+echo =======  @2 Executing npm install: Finished at `date` =======
 
 
 # 3. Build ng app
