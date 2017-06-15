@@ -112,10 +112,21 @@ selectNodeVersion
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install --production
+  eval $NPM_CMD install
+  eval $NPM_CMD build
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
 
+# 4. Build ng app
+ IF EXIST "$DEPLOYMENT_TARGET/package.json" (
+      pushd "DEPLOYMENT_TARGET"
+      eval $NPM_CMD ./node_modules/@angular/cli/bin/ng build --prod --env=prod --aot
+      #:: the next line is optional to fix 404 error see section #8
+      #call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
+      #IF !ERRORLEVEL! NEQ 0 goto error
+      #popd
+      exitWithMessageOnError "ng build failed"
+    )
 ##################################################################################################################################
 echo "Finished successfully."
