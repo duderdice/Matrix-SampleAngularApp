@@ -120,7 +120,7 @@ echo "NEXT_MANIFEST_PATH = ${NEXT_MANIFEST_PATH}"
 echo "PREVIOUS_MANIFEST_PATH = ${PREVIOUS_MANIFEST_PATH}"
 echo =======  [1] Using variables: Finished at `date` =======
 
-
+exit
 
 # 2. Install npm packages
 echo =======  [2] Executing npm install: Starting at `date` =======
