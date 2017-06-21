@@ -27,16 +27,16 @@ az webapp create --name ${MyAppName} --resource-group ${MyResourceGroup} --plan 
 # various ways to query; use "--output table" to get data in tabular form instead of json
 az group list
 az group list --output table
-az group list --ResourceGroup ${MyResourceGroup}
 az group list --query "[?contains(name,'${MyResourceGroup}')]"
 az group list --query "[?name=='${MyResourceGroup}']"
 
+az appservice plan list
 
 az resource list
 az resource list --output table
 
 
-az webapp list --output table
+az webapp list
 az webapp list --output table
 
 

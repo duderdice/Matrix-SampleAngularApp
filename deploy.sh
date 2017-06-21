@@ -31,9 +31,6 @@ SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
 KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
 
-# DGA - declare deployment source as /dist/
-#DEPLOYMENT_SOURCE="${SCRIPT_DIR}/dist"
-
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
 fi
@@ -106,6 +103,23 @@ echo ******* Executing node.js deployment. *******
 
 # 1. Select node version
 selectNodeVersion
+
+echo =======  [1] Using variables: Starting at `date` =======
+echo "BASH_SOURCE = ${BASH_SOURCE}"
+echo "SCRIPT_DIR = ${SCRIPT_DIR}"
+echo "DEPLOYMENT_SOURCE = ${DEPLOYMENT_SOURCE}"
+echo "DEPLOYMENT_TARGET = ${DEPLOYMENT_TARGET}"
+echo "DEPLOYMENT_TEMP = ${DEPLOYMENT_TEMP}"
+echo "IN_PLACE_DEPLOYMENT = ${IN_PLACE_DEPLOYMENT}"
+echo "KUDU_SYNC_CMD = ${KUDU_SYNC_CMD}"
+echo "SELECT_NODE_VERSION = ${SELECT_NODE_VERSION}"
+echo "NODE_EXE = ${NODE_EXE}"
+echo "NPM_CMD = ${NPM_CMD}"
+echo "NPM_JS_PATH = ${NPM_JS_PATH}"
+echo "NEXT_MANIFEST_PATH = ${NEXT_MANIFEST_PATH}"
+echo "PREVIOUS_MANIFEST_PATH = ${PREVIOUS_MANIFEST_PATH}"
+echo =======  [1] Using variables: Finished at `date` =======
+
 
 
 # 2. Install npm packages
