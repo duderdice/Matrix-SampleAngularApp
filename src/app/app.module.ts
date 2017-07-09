@@ -15,6 +15,8 @@ import { APP_COMPONENTS } from './app.components';
 import { APP_ROUTES } from './app.routes';
 import { APP_SERVICES } from './app.services';
 import { APP_STORES } from './app.stores';
+import { environment } from '../environments/environment';
+import { MockHttpModule } from './mocks/mock-http.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { APP_STORES } from './app.stores';
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
+    environment.useMocking ? MockHttpModule : HttpModule,
     MomentModule,
     RouterModule.forRoot(APP_ROUTES),
     StoreModule.provideStore(APP_STORES),

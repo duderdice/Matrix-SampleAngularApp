@@ -1,10 +1,10 @@
 {
   "name": "matrix-sample-angular-app",
   "version": "0.0.1",
-  "license": "ISC",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run lint && ng serve",
+    "start:mock": "npm run lint && ng serve --env=mock",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

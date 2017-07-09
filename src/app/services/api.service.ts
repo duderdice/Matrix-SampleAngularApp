@@ -5,12 +5,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/Rx';
 
-import { AppStateActions } from '../actionHandlers/appState.actions';
+import { LoaderActions } from '../actionHandlers/loader.actions';
 import { LoggingService, LogLevels } from './logging.service';
-// import { apiMockServiceResponses } from '../servicesMock/api.serviceMock';
-// import { inject } from '../servicesMock/mockBackendInjector';
 import * as Constants from '../constants/constants';
-// import { ErrorHelper } from '../helpers/errorHelper';
 
 // declare Angular HTTP RequestType constants for callers
 export const
@@ -25,13 +22,8 @@ export class ApiService {
     constructor(
         private _http: Http,
         private _loggingService: LoggingService,
-        private _appStateActions: AppStateActions,
-        // private _errorHelper: ErrorHelper
-    ) {
-        // if (Constants.USE_MOCKING) {
-        //     inject(this, apiMockServiceResponses);
-        // }
-    }
+        private _loaderActions: LoaderActions
+    ) { }
 
     public callApiService({ requestType, url, headers, body, shouldBlock, responseType }: { requestType: string, url: string, headers?: Headers, body?: string, shouldBlock?: boolean, responseType?: ResponseContentType }): Observable<any> {
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiService(${requestType}, ${url}, ${headers}, ${body})`);
@@ -50,17 +42,17 @@ export class ApiService {
         });
 
         let response: Observable<Response>;
-        // this._appStateActions.showLoaderGraphic(shouldBlock);
+        this._loaderActions.showLoaderGraphic(shouldBlock);
         switch (requestType) {
 
             case REQUEST_TYPE_GET:
                 response = this._http.get(url, requestOptions)
                     .map(res => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -69,11 +61,11 @@ export class ApiService {
             case REQUEST_TYPE_POST:
                 response = this._http.post(url, body, requestOptions)
                     .map(res => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -82,11 +74,11 @@ export class ApiService {
             case REQUEST_TYPE_PUT:
                 response = this._http.put(url, body, requestOptions)
                     .map(res => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -95,11 +87,11 @@ export class ApiService {
             case REQUEST_TYPE_DELETE:
                 response = this._http.delete(url, requestOptions)
                     .map(res => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         return this.getResponseContent(url, res);
                     })
                     .catch(err => {
-                        // this._appStateActions.hideLoaderGraphic();
+                        this._loaderActions.hideLoaderGraphic();
                         this._loggingService.sendLogMessage(LogLevels.ERROR, this.getLoggableErrorMessage({ requestType, url, headers, body, err }));
                         return Observable.throw(err);
                     });
@@ -112,7 +104,7 @@ export class ApiService {
     }
 
     public callApiServiceXhr({ requestType, url, headers, body, shouldBlock, responseType }: { requestType: string, url: string, headers?: Headers, body?: string, shouldBlock?: boolean, responseType?: ResponseContentType }): Observable<any> {
-        // this._appStateActions.showLoaderGraphic(shouldBlock);
+        this._loaderActions.showLoaderGraphic(shouldBlock);
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiServiceXhr(${requestType}, ${url}, ${headers}, ${body})`);
         return Observable.create((observer) => {
             const xhr = new XMLHttpRequest();
@@ -121,7 +113,7 @@ export class ApiService {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                    // this._appStateActions.hideLoaderGraphic();
+                    this._loaderActions.hideLoaderGraphic();
                     if (xhr.status === 200 || xhr.status === 201) {
                         // observer.next(JSON.stringify(xhr.response));
                         observer.next(JSON.parse(xhr.response));
