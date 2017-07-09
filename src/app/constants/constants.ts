@@ -7,7 +7,6 @@
 export const
     AppName = 'SampleAngularApp',
     AppVersion = 'v0.0.0',
-    BuildType = 'noBuildType',
     DATE_FORMAT_ddmmyyyy = 'dd-mmm-yyyy',
     DATE_FORMAT_dMMMy = 'dd-MMM-y',
     DATE_TIME_FORMAT = 'dd-MMM-y HH:mm Z',
@@ -15,9 +14,8 @@ export const
     DEBOUNCE_INTERVAL = 400,
     DEBOUNCE_INTERVAL_LONG = 700,
     MAXIMUM_FILE_UPLOAD_SIZE_IN_MEGABYTES = 10,
-    ApiBaseUrl = 'http://rpc11304.corp.ncr.com:8200/quby/api',
+    ApiBaseUrl = '/api',
     AppBaseUrl = '/',
-    USE_MOCKING = false,
     RESPONSE_MESSAGE_TYPE = {
         SUCCESS: 'SUCCESS',
         ERROR: 'ERROR',

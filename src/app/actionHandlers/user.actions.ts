@@ -11,7 +11,7 @@ import { UPDATE_PAYMENT_TRX, CLEAR_PAYMENT_TRX } from '../stores/payment.store';
 @Injectable()
 export class UserActions {
 
-    private RESPONSE_MESSAGE_TYPE = Constants.RESPONSE_MESSAGE_TYPE;
+    // private RESPONSE_MESSAGE_TYPE = Constants.RESPONSE_MESSAGE_TYPE;
 
     constructor(
         private _store: Store<any>,
