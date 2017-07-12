@@ -6,7 +6,7 @@ import { Http, HttpModule, BaseRequestOptions, XHRBackend, Response, ResponseOpt
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { CommonModule } from '@angular/common';
 import { VehicleTypesMock } from './vehicleTypes.mock';
-import { SubmitPaymentMockResponse } from './submitPaymentTrx.mock';
+import { PaymentMock } from './submitPaymentTrx.mock';
 import * as Constants from '../constants/constants';
 
 export function httpFactory(mockBackend, options) {
@@ -46,7 +46,7 @@ export class MockHttpModule {
         if (request.url === `${Constants.ApiBaseUrl}/vehicleTypes` && request.method === 0) {
             body = (new VehicleTypesMock).getVehicleTypes();
         } else if (request.url === `${Constants.ApiBaseUrl}/submitPaymentTrx` && request.method === 1) {
-            body = (new SubmitPaymentMockResponse).submitPaymentTrxMock(request._body);
+            body = (new PaymentMock).processPaymentTrxMock(request._body);
         } else {
             return {
                 status: 404,

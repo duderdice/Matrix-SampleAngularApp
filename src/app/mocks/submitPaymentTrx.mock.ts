@@ -2,9 +2,9 @@ import { PaymentTrxRequest } from '../models/paymentTrxRequest';
 import { PaymentTrxResponse } from '../models/paymentTrxResponse';
 import * as moment from 'moment';
 
-export class SubmitPaymentMockResponse {
+export class PaymentMock {
 
-    public submitPaymentTrxMock(paymentTrxRequest: PaymentTrxRequest): PaymentTrxResponse {
+    public processPaymentTrxMock(paymentTrxRequest: PaymentTrxRequest): PaymentTrxResponse {
         const goodPaymentTrxResponse: PaymentTrxResponse = {
             id: '12345',
             trxDateTime: moment().format('LLLL'),
