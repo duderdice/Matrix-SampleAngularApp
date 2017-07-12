@@ -9,7 +9,7 @@ import { VehicleType } from '../../models/vehicleType';
   // templateUrl: './vehicleType.component.html',
   template: `
     <div class="mainContainer">
-      <h1 class="name">{{selectedVehicleType.name}}</h1>
+      <h1 class="name">{{selectedVehicleType?.name}}</h1>
       <div><img class="vehicleTypeImage" src="{{selectedVehicleType?.imageUrl}}" /></div>
       <div class="description">{{selectedVehicleType?.description}}</div>
       <div class="basePrice">{{selectedVehicleType?.basePrice | currency: 'USD' : true }}</div>

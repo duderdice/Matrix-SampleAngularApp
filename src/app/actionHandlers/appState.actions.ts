@@ -28,7 +28,7 @@ export class AppStateActions {
             },
             (err) => {
                 this._store.dispatch({ type: UPDATE_VEHICLE_TYPES, payload: [] });
-                this._notificationActions.notifyError({ title: 'Error loading ShipmentTypes', message: JSON.stringify(err) });
+                this._notificationActions.notifyError({ title: 'Error loading Vehicle types', message: JSON.stringify(err) });
             });
     }
 
