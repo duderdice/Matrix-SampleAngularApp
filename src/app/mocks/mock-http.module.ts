@@ -6,6 +6,8 @@ import { Http, HttpModule, BaseRequestOptions, XHRBackend, Response, ResponseOpt
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { CommonModule } from '@angular/common';
 import { VehicleTypesMock } from './vehicleTypes.mock';
+import { SubmitPaymentMockResponse } from './submitPaymentTrx.mock';
+import * as Constants from '../constants/constants';
 
 export function httpFactory(mockBackend, options) {
     return new Http(mockBackend, options);
@@ -33,32 +35,29 @@ export class MockHttpModule {
         _mockBackend.connections
             .delay(this._delayInMilliseconds)
             .map((connection: MockConnection) => {
-                const responseOptions = this.getMatchingMockResponse(connection.request.url);
+                const responseOptions = this.getMatchingMockResponse(connection.request);
                 return connection.mockRespond(new Response(new ResponseOptions(responseOptions)));
             })
             .subscribe();
     }
 
-    private getMatchingMockResponse(url: string) {
+    private getMatchingMockResponse(request) {
         let body;
-        switch (url) {
-
-            case '/api/vehicleTypes':
-                body = (new VehicleTypesMock).getVehicleTypes();
-                break;
-
-            default:
-                return {
-                    status: 404,
-                    statusText: 'Not Found',
-                    url: url,
-                };
-        };
-
+        if (request.url === `${Constants.ApiBaseUrl}/vehicleTypes` && request.method === 0) {
+            body = (new VehicleTypesMock).getVehicleTypes();
+        } else if (request.url === `${Constants.ApiBaseUrl}/submitPaymentTrx` && request.method === 1) {
+            body = (new SubmitPaymentMockResponse).submitPaymentTrxMock(request._body);
+        } else {
+            return {
+                status: 404,
+                statusText: 'Not Found',
+                url: request.url,
+            };
+        }
         return {
             status: 200,
             statusText: 'OK',
-            url: url,
+            url: request.url,
             body: JSON.stringify(body),
             headers: new Headers({ 'Content-Type': 'application/json' })
         };

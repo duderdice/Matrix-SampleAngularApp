@@ -25,7 +25,7 @@ export class ApiService {
         private _loaderActions: LoaderActions
     ) { }
 
-    public callApiService({ requestType, url, headers, body, shouldBlock, responseType }: { requestType: string, url: string, headers?: Headers, body?: string, shouldBlock?: boolean, responseType?: ResponseContentType }): Observable<any> {
+    public callApiService({ requestType, url, headers, body, shouldBlock, responseType }: { requestType: string, url: string, headers?: Headers, body?: any, shouldBlock?: boolean, responseType?: ResponseContentType }): Observable<any> {
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiService(${requestType}, ${url}, ${headers}, ${body})`);
 
         // ensure we have at least a default headers object
