@@ -1,6 +1,3 @@
-// borrowed this technique from => https://www.beyondjava.net/blog/mocking-http-services-with-angular-generically/
-// see this repo for mock example => https://github.com/stephanrauh/ExploringAngular/tree/master/Tic-Tac-Toe
-
 import { NgModule, Inject, OpaqueToken } from '@angular/core';
 import { Http, HttpModule, BaseRequestOptions, XHRBackend, Response, ResponseOptions, Headers } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -8,6 +5,12 @@ import { CommonModule } from '@angular/common';
 import { VehicleTypesMock } from './vehicleTypes.mock';
 import { PaymentMock } from './submitPaymentTrx.mock';
 import * as Constants from '../constants/constants';
+
+const
+    REQUEST_TYPE_GET = 0,
+    REQUEST_TYPE_POST = 1,
+    REQUEST_TYPE_PUT = 2,
+    REQUEST_TYPE_DELETE = 3;
 
 export function httpFactory(mockBackend, options) {
     return new Http(mockBackend, options);
@@ -43,9 +46,9 @@ export class MockHttpModule {
 
     private getMatchingMockResponse(request) {
         let body;
-        if (request.url === `${Constants.ApiBaseUrl}/vehicleTypes` && request.method === 0) {
+        if (request.url === `${Constants.ApiBaseUrl}/vehicleTypes` && request.method === REQUEST_TYPE_GET) {
             body = (new VehicleTypesMock).getVehicleTypes();
-        } else if (request.url === `${Constants.ApiBaseUrl}/submitPaymentTrx` && request.method === 1) {
+        } else if (request.url === `${Constants.ApiBaseUrl}/submitPaymentTrx` && request.method === REQUEST_TYPE_POST) {
             body = (new PaymentMock).processPaymentTrxMock(request._body);
         } else {
             return {
