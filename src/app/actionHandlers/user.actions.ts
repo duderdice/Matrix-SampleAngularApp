@@ -24,7 +24,7 @@ export class UserActions {
         this._api.callApiService({
             requestType: REQUEST_TYPE_POST,
             url: `${Constants.ApiBaseUrl}/submitPaymentTrx`,
-            body: paymentTrxRequest,
+            body: JSON.stringify(paymentTrxRequest),
         }).subscribe(
             (response) => {
                 if (response.isSuccessful) {
