@@ -2,14 +2,19 @@
   "name": "matrix-sample-angular-app",
   "version": "0.0.1",
   "scripts": {
+    "build:dev": "ng build --env=dev",
+    "build:mock": "ng build --env=mock",
+    "build:prod": "ng build --env=prod",
+    "clean": "rimraf -- dist/* node_modules",
+    "clean:dist": "rimraf -- dist/*",
+    "e2e": "ng e2e",
+    "generate:deployment-script": "kuduscript -y --node",
+    "lint": "ng lint",
     "ng": "ng",
     "start": "npm run lint && ng serve",
     "start:mock": "npm run lint && ng serve --env=mock",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "generate:deployment-script": "kuduscript -y --node"
+    "start:mock:nolint": "ng serve --env=mock",
+    "test": "npm run lint && ng test"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +53,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "kuduscript": "^1.0.15",
     "protractor": "~5.1.2",
+    "rimraf": "^2.6.1",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
