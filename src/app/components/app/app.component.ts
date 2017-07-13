@@ -9,6 +9,7 @@ import { AppStateActions } from '../../actionHandlers/appState.actions';
     template: `
         <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
         <div class="mainBodyLayout">
+            <app-mocking-ribbon></app-mocking-ribbon>
             <app-header></app-header>
             <div class="mainBody">
                 <router-outlet></router-outlet>
