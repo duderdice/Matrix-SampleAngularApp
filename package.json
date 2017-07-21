@@ -2,6 +2,7 @@
   "name": "matrix-sample-angular-app",
   "version": "0.0.1",
   "scripts": {
+    "build": "npm run build:prod",
     "build:dev": "ng build --env=dev",
     "build:mock": "ng build --env=mock",
     "build:prod": "ng build --env=prod",
