@@ -136,7 +136,7 @@ echo
 echo =======  [3] Executing npm build: Starting at `date` =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   cd "$DEPLOYMENT_SOURCE"
-  eval $NPM_CMD run build
+  eval $NPM_CMD run build:mock
   exitWithMessageOnError "npm build failed"
   cd - > /dev/null
 fi
