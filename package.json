@@ -12,6 +12,7 @@
     "generate:deployment-script": "kuduscript -y --node",
     "lint": "ng lint",
     "ng": "ng",
+    "prebuild": "npm run clean:dist",
     "start": "npm run lint && ng serve",
     "start:mock": "npm run lint && ng serve --env=mock",
     "start:mock:nolint": "ng serve --env=mock",
