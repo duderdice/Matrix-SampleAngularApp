@@ -136,8 +136,9 @@ echo
 echo =======  [3] Executing npm build: Starting at `date` =======
 if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   cd "$DEPLOYMENT_SOURCE"
-  eval ./node_modules/@angular/cli/bin/ng build
-  exitWithMessageOnError "ng build failed"
+  #eval ./node_modules/@angular/cli/bin/ng build
+  eval $NPM_CMD run build
+  exitWithMessageOnError "npm build failed"
   cd - > /dev/null
 fi
 echo =======  [3] Executing npm build: Finished at `date` =======
