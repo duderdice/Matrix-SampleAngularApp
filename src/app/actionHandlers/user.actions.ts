@@ -23,7 +23,7 @@ export class UserActions {
 
     public processPaymentTrx(paymentTrxRequest: PaymentTrxRequest): void {
         const processPaymentReq = new HttpRequest(REQUEST_TYPE_POST, `${Constants.ApiBaseUrl}/submitPaymentTrx`, paymentTrxRequest);
-        this._api.callApiService<PaymentTrxResponse>(processPaymentReq)    
+        this._api.callApiService<PaymentTrxResponse>(processPaymentReq)
             .subscribe(
                 (response) => {
                     if (response.isSuccessful) {
