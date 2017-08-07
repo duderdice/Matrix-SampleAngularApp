@@ -29,7 +29,6 @@ export class ApiService {
     public callApiService<T>(req: HttpRequest<any>): Observable<T> {
         this._loggingService.sendLogMessage(LogLevels.DEBUG, `Entered ApiService.callApiService(${req.method}, ${req.url}, ${req.headers}, ${req.body})`);
 
-
         let response;
         this._loaderActions.showLoaderGraphic(true);
         switch (req.method) {
