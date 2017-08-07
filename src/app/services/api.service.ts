@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, ResponseOptions, ResponseType, ResponseContentType, Headers, RequestOptions, RequestMethod } from '@angular/http';
 import { HttpClient, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -135,7 +134,6 @@ export class ApiService {
     // }
 
     private getLoggableErrorMessage({ req, err}: { req: HttpRequest<any>, err: HttpErrorResponse}): string {
-        // const bodyTxt = this._errorHelper.getErrorMessageFromObservable(err);
         const bodyTxt = JSON.stringify(err);
         return `Error occurred in ApiService.callApiService(${req.method}, ${req.url}, ${req.headers}, ${err.message} => ${err}`;
     }
