@@ -1,13 +1,13 @@
-import { HttpClient, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/Rx';
 
 import { LoaderActions } from '../actionHandlers/loader.actions';
-import { LoggingService, LogLevels } from './logging.service';
 import * as Constants from '../constants/constants';
+import { LoggingService, LogLevels } from './logging.service';
 
 // declare Angular HTTP RequestType constants for callers
 export const

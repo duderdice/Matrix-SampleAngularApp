@@ -1,11 +1,11 @@
+import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { NotificationActions } from '../actionHandlers/notification.actions';
 import * as Constants from '../constants/constants';
 import { VehicleType } from '../models/vehicleType';
-import { ApiService, REQUEST_TYPE_GET, REQUEST_TYPE_POST, REQUEST_TYPE_PUT, REQUEST_TYPE_DELETE } from '../services/api.service';
-import { HttpRequest } from '@angular/common/http';
+import { ApiService, REQUEST_TYPE_DELETE, REQUEST_TYPE_GET, REQUEST_TYPE_POST, REQUEST_TYPE_PUT } from '../services/api.service';
 import { UPDATE_APP_STATE } from '../stores/appState.store';
 import { UPDATE_VEHICLE_TYPES } from '../stores/vehicles.store';
 

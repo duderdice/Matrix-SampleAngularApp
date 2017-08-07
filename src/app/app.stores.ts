@@ -4,9 +4,9 @@ import { combineReducers } from '@ngrx/store';
 
 // Stores/Reducers
 import { appState, loaderState } from './stores/appState.store';
+import { payment } from './stores/payment.store';
 import { user, userRoleMask } from './stores/user.store';
 import { vehicleTypes } from './stores/vehicles.store';
-import { payment } from './stores/payment.store';
 
 // const reducers = { /* see below */
 export const APP_STORES = {

@@ -1,4 +1,4 @@
-import { Reducer, Action } from '@ngrx/store';
+import { Action, Reducer } from '@ngrx/store';
 import { VehicleType } from '../models/vehicleType';
 
 // ActionTypes
@@ -21,4 +21,3 @@ export function vehicleTypes(state: Array<VehicleType> = [], action: Action) {
 
     }
 };
-
