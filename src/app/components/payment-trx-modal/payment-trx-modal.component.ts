@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStateActions } from '../../actionHandlers/appState.actions';
 import { NotificationActions } from '../../actionHandlers/notification.actions';

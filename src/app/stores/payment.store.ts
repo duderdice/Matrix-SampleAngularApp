@@ -1,4 +1,4 @@
-import { Reducer, Action } from '@ngrx/store';
+import { Action, Reducer } from '@ngrx/store';
 import { PaymentTrxResponse } from '../models/paymentTrxResponse';
 
 // ActionTypes
@@ -21,4 +21,3 @@ export function payment(state: PaymentTrxResponse = null, action: Action) {
 
     }
 };
-

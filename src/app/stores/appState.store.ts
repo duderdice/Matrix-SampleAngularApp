@@ -1,6 +1,7 @@
-import { Reducer, Action } from '@ngrx/store';
-import { LogLevels } from '../services/logging.service';
+import { Action, Reducer } from '@ngrx/store';
+
 import * as Constants from '../constants/constants';
+import { LogLevels } from '../services/logging.service';
 
 // ActionTypes
 export const
