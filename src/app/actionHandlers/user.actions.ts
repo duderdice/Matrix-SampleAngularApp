@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpRequest } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import * as Constants from '../constants/constants';
 import * as moment from 'moment';
@@ -21,28 +22,27 @@ export class UserActions {
     ) { }
 
     public processPaymentTrx(paymentTrxRequest: PaymentTrxRequest): void {
-        this._api.callApiService({
-            requestType: REQUEST_TYPE_POST,
-            url: `${Constants.ApiBaseUrl}/submitPaymentTrx`,
-            body: JSON.stringify(paymentTrxRequest),
-        }).subscribe(
-            (response) => {
-                if (response.isSuccessful) {
-                    this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: response });
-                    this._notificationActions.notifySuccess({
-                        title: 'Payment-Trx', message: `Payment transaction successful - confirmation code ${response.confirmationCode}`
-                    });
-                } else {
+        const processPaymentReq = new HttpRequest(REQUEST_TYPE_POST, `${Constants.ApiBaseUrl}/submitPaymentTrx`, paymentTrxRequest);
+        this._api.callApiService<PaymentTrxResponse>(processPaymentReq)    
+            .subscribe(
+                (response) => {
+                    if (response.isSuccessful) {
+                        this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: response });
+                        this._notificationActions.notifySuccess({
+                            title: 'Payment-Trx', message: `Payment transaction successful - confirmation code ${response.confirmationCode}`
+                        });
+                    } else {
+                        this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: [] });
+                        this._notificationActions.notifyWarning({
+                            title: 'Payment-Trx', message: `Payment transaction failed:  [${response.errorCode}] ${response.errorMessage}`
+                        });
+                    }
+                },
+                (err) => {
                     this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: [] });
-                    this._notificationActions.notifyWarning({
-                        title: 'Payment-Trx', message: `Payment transaction failed:  [${response.errorCode}] ${response.errorMessage}`
-                    });
+                    this._notificationActions.notifyError({ title: 'Error loading payment', message: JSON.stringify(err) });
                 }
-            },
-            (err) => {
-                this._store.dispatch({ type: UPDATE_PAYMENT_TRX, payload: [] });
-                this._notificationActions.notifyError({ title: 'Error loading payment', message: JSON.stringify(err) });
-            });
+            );
     }
 
 }
