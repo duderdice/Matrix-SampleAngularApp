@@ -1,12 +1,12 @@
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
-import { Http, Response, ResponseOptions, Headers, RequestOptions, RequestMethod, Request } from '@angular/http';
-import * as moment from 'angular2-moment';
-import * as Constants from '../constants/constants';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Headers, Http, Request, RequestMethod, RequestOptions, Response, ResponseOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { User } from '../models/user';
-
+import * as moment from 'angular2-moment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
+import * as Constants from '../constants/constants';
+import { User } from '../models/user';
 
 export const LogLevels = {
     ALL: 0, // only for use in appState.logging.logLevel

@@ -1,5 +1,6 @@
+import { Action, Reducer } from '@ngrx/store';
+
 import { User } from '../models/user';
-import { Reducer, Action } from '@ngrx/store';
 
 export const
     LOAD_USER_PROFILE = 'LOAD_USER_PROFILE',
@@ -30,4 +31,3 @@ export function userRoleMask(state: any = {}, action: Action) {
             return state;
     }
 };
-

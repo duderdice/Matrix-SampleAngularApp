@@ -36,6 +36,9 @@
     ],
     "no-arg": true,
     "no-bitwise": true,
+    "no-consecutive-blank-lines": [
+      true
+    ],
     "no-console": [
       true,
       "debug",
@@ -52,7 +55,8 @@
     "no-eval": true,
     "no-inferrable-types": [
       true,
-      "ignore-params"
+      "ignore-params",
+      "ignore-properties"
     ],
     "no-misused-new": true,
     "no-non-null-assertion": true,
@@ -72,6 +76,13 @@
       "check-catch",
       "check-else",
       "check-whitespace"
+    ],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-first"
+      }
     ],
     "prefer-const": true,
     "quotemark": [
