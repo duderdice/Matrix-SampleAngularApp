@@ -7,6 +7,8 @@ import * as Constants from '../constants/constants';
 import { PaymentTrxRequest } from '../models/paymentTrxRequest';
 import { PaymentTrxResponse } from '../models/paymentTrxResponse';
 
+const delayInMilliseconds = Math.floor(Math.random() * 1000);
+
 @Injectable()
 export class MockPaymentInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,7 +17,7 @@ export class MockPaymentInterceptor implements HttpInterceptor {
       const response = new HttpResponse({
         body: paymentResponse
       });
-      return Observable.of(response);
+      return Observable.of(response).delay(delayInMilliseconds);
     }
     return next.handle(req);
   }
