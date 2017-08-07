@@ -13,6 +13,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { AppComponent } from './components/app/app.component';
 import { APP_ACTION_HANDLERS } from './app.actionHandlers';
 import { APP_COMPONENTS } from './app.components';
+import { APP_MOCK_INTERCEPTORS } from './app.mock.interceptors';
 import { APP_ROUTES } from './app.routes';
 import { APP_SERVICES } from './app.services';
 import { APP_STORES } from './app.stores';
@@ -38,6 +39,7 @@ import { MockHttpModule } from './mocks/mock-http.module';
   providers: [
     ...APP_ACTION_HANDLERS,
     ...APP_SERVICES,
+    ...(environment.useMocking ? APP_MOCK_INTERCEPTORS : [])
   ],
   bootstrap: [AppComponent]
 })

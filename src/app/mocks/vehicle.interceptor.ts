@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import * as Constants from '../constants/constants';
 import { VehicleType } from '../models/vehicleType';
 
-const delayInMilliseconds = Math.floor(Math.random() * 1000);
-
 @Injectable()
 export class MockVehicleInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,8 +13,7 @@ export class MockVehicleInterceptor implements HttpInterceptor {
       const response = new HttpResponse({
         body: vehicleResponse
       });
-
-      return Observable.of(response).delay(delayInMilliseconds);
+      return Observable.of(response);
     }
     return next.handle(req);
   }
