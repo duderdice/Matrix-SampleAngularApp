@@ -24,7 +24,7 @@ export class MockVehicleInterceptor implements HttpInterceptor {
         id: 'S',
         name: 'Model S',
         description: 'Luxury sedan with great performance',
-        imageUrl: 'http://insideevs.com/wp-content/uploads/2013/12/tesla-model-s-beach.jpg',
+        imageUrl: 'https://s1.cdn.autoevolution.com/images/gallery/TESLA-MOTORS-Model-S-4693_82.jpg',
         basePrice: 65000,
       },
       {
