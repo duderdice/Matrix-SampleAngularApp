@@ -1,10 +1,10 @@
-import { MatrixSampleAngularAppPage } from './app.po';
+import { SampleAngularAppPage } from './app.po';
 
-describe('matrix-sample-angular-app App', () => {
-  let page: MatrixSampleAngularAppPage;
+describe('sample-angular-app App', () => {
+  let page: SampleAngularAppPage;
 
   beforeEach(() => {
-    page = new MatrixSampleAngularAppPage();
+    page = new SampleAngularAppPage();
   });
 
   it('should display welcome message', done => {
