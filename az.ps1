@@ -10,7 +10,7 @@ Password=secret!
 az webapp deployment user set --user-name ${UserName} --password ${Password}
 
 # create resource groups for app
-MyResourceGroup=Matrix-SampleAngularApp
+MyResourceGroup=SampleAngularApp
 MyLocation=eastus
 az group create --name ${MyResourceGroup} --location ${MyLocation}
 
@@ -19,7 +19,7 @@ MyAppServicePlan=serviceplanX
 az appservice plan create --name ${MyAppServicePlan} --resource-group ${MyResourceGroup} --sku FREE
 
 # create web app within the service plan
-MyAppName=Matrix-SampleAngularApp
+MyAppName=SampleAngularApp
 #az appservice web create --name ${MyAppName} --resource-group ${MyResourceGroup} --plan ${MyAppServicePlan}
 az webapp create --name ${MyAppName} --resource-group ${MyResourceGroup} --plan ${MyAppServicePlan}
 

@@ -1,4 +1,4 @@
-# MatrixSampleAngularApp
+# SampleAngularApp
 
 Sample app for demonstrating Angular architectural and project patterns.
 
@@ -32,8 +32,8 @@ Before running the tests make sure you are serving the app via `npm run start`.
 ## Continuous Integration
 
 This app has been configured on Azure App Service for continuous integration, triggered by git commits to the main repo.  Available at the following links:
-* [UAT](http://matrix-sampleangularapp-uat.azurewebsites.net)
-* [PROD](http://matrix-sampleangularapp.azurewebsites.net)
+* [UAT](http://sampleangularapp-uat.azurewebsites.net)
+* [PROD](http://sampleangularapp.azurewebsites.net)
 
 ## Recommended Reading => Automating Azure deployments from Github commits
 * [Setting up Azure deployments](https://blogs.msdn.microsoft.com/microsoftimagine/2015/09/01/using-continuous-integration-with-azure-github/)

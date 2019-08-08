@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class MatrixSampleAngularAppPage {
+export class SampleAngularAppPage {
   navigateTo() {
     return browser.get('/');
   }
